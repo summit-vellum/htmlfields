@@ -1,0 +1,26 @@
+{
+    "name": "quill/html",
+    "description": "Quill authoring fields",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Summit Digital",
+            "email": "spci.redesign@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Quill\\Html\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Quill\\Html\\FieldsServiceProvider"
+            ]
+        }
+    }
+}
