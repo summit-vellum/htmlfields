@@ -61,9 +61,16 @@ class BaseField implements Field
     public function rules()
     {
         $args = func_get_args() ?? false;
-
+        
         $this->setAttribute('rules', implode('|', $args));
         $this->setAttribute('required', (bool)in_array('required', $args));
+        
+        return $this;
+    }
+
+    public function rulesMessages($message = false)
+    {
+        $this->setAttribute('messages', $message);
 
         return $this;
     }
