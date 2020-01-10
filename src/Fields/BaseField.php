@@ -68,6 +68,26 @@ class BaseField implements Field
         return $this;
     }
 
+    public function createRules()
+    {
+        $args = func_get_args() ?? false;
+        
+        $this->setAttribute('createRules', implode('|', $args));
+        $this->setAttribute('required', (bool)in_array('required', $args));
+        
+        return $this;
+    }
+
+    public function updateRules()
+    {
+        $args = func_get_args() ?? false;
+        
+        $this->setAttribute('updateRules', implode('|', $args));
+        $this->setAttribute('required', (bool)in_array('required', $args));
+        
+        return $this;
+    }
+
     public function rulesMessages($message = false)
     {
         $this->setAttribute('messages', $message);
