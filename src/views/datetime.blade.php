@@ -74,6 +74,7 @@
 			date = '{{ old($attributes['id'], $value) }}',
 			actualDate = (date) ? date : dateNow;
 
+		$(element).val(actualDate);
 		loadDatePicker(actualDate);
 
 		function loadDatePicker(date) {
