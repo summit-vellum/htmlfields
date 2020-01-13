@@ -14,8 +14,6 @@
 
     @form
 
-    	<!-- <input type="text" name="datetimes" /> -->
-
        {{--  <div class="input-group date" style="max-width: 18rem;">
             <input
                 name="{{ $attributes['id'] }}"
