@@ -39,6 +39,14 @@ class BaseField implements Field
         $this->setAttribute('element', str_replace('field','', $element));
     }
 
+    public function tagsInput($options=[])
+    {
+    	//$apiUrl, $fields, $fieldName, $isMultiple=false
+    	$this->setAttribute('tagsinput', 'data-tagsinput');
+    	$this->setAttribute('tagsinput-config', json_encode($options));
+    	return $this;
+    }
+
     public function make($name, $slug = false)
     {
         $this->attributes = [];
@@ -61,30 +69,30 @@ class BaseField implements Field
     public function rules()
     {
         $args = func_get_args() ?? false;
-        
+
         $this->setAttribute('rules', implode('|', $args));
         $this->setAttribute('required', (bool)in_array('required', $args));
-        
+
         return $this;
     }
 
     public function createRules()
     {
         $args = func_get_args() ?? false;
-        
+
         $this->setAttribute('createRules', implode('|', $args));
         $this->setAttribute('required', (bool)in_array('required', $args));
-        
+
         return $this;
     }
 
     public function updateRules()
     {
         $args = func_get_args() ?? false;
-        
+
         $this->setAttribute('updateRules', implode('|', $args));
         $this->setAttribute('required', (bool)in_array('required', $args));
-        
+
         return $this;
     }
 
@@ -215,7 +223,7 @@ class BaseField implements Field
 
         foreach ($this->getAttributes() as $key => $value){
             if($attr = $this->getAttribute($key) !== null) {
-                
+
                 $attributes['collections'][$property][$key] = $value;
 
 
