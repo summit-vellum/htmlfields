@@ -13,7 +13,6 @@ class BaseField implements Field
     protected $attributes = [];
     protected $htmlAttributes = [];
     protected $sortableFields = [];
-
     public static $searchable = [];
 
     public function getAttributes()
@@ -44,6 +43,7 @@ class BaseField implements Field
     	//$apiUrl, $fields, $fieldName, $isMultiple=false
     	$this->setAttribute('tagsinput', 'data-tagsinput');
     	$this->setAttribute('tagsinput-config', json_encode($options));
+
     	return $this;
     }
 
@@ -227,7 +227,7 @@ class BaseField implements Field
                 $attributes['collections'][$property][$key] = $value;
 
 
-                if(gettype($value) === 'boolean') {
+                if (gettype($value) === 'boolean') {
                     $attributes[$key][] = $property;
                 } else {
                     $attributes[$key][$property] = $value;
@@ -237,5 +237,4 @@ class BaseField implements Field
 
         return $attributes;
     }
-
 }
