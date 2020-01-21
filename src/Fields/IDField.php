@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class IDField extends BaseField
 {
-    public function make($name = 'Id', $slug = false)
+    public function make($name = 'id', $slug = false)
     {
         parent::make($name);
 

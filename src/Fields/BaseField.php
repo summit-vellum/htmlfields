@@ -188,7 +188,7 @@ class BaseField implements Field
 
         foreach ($this->getAttributes() as $key => $value){
             if($attr = $this->getAttribute($key) !== null) {
-                
+
                 $attributes['collections'][$property][$key] = $value;
 
 
