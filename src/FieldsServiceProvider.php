@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
 
-class FieldsServiceProvider extends ServiceProvider 
+class FieldsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
@@ -14,6 +14,10 @@ class FieldsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/config/html.php', 'html');
 
         $this->registerFields();
+
+        $this->publishes([
+        	__DIR__ . '/public' => public_path('vendor/html')
+        ], 'html.public');
     }
 
     public function register()
@@ -26,7 +30,7 @@ class FieldsServiceProvider extends ServiceProvider
 
     /**
      * Bind all fields registered in the config/html.php file
-     * 
+     *
      * @return void
      */
     public function registerFields()

@@ -13,7 +13,6 @@ class BaseField implements Field
     protected $attributes = [];
     protected $htmlAttributes = [];
     protected $sortableFields = [];
-
     public static $searchable = [];
 
     public function getAttributes()
@@ -37,6 +36,15 @@ class BaseField implements Field
         $element = last(explode('\\', $class));
 
         $this->setAttribute('element', str_replace('field','', $element));
+    }
+
+    public function tagsInput($options=[])
+    {
+    	//$apiUrl, $fields, $fieldName, $isMultiple=false
+    	$this->setAttribute('tagsinput', 'data-tagsinput');
+    	$this->setAttribute('tagsinput-config', json_encode($options));
+
+    	return $this;
     }
 
     public function make($name, $slug = false)
@@ -64,6 +72,33 @@ class BaseField implements Field
 
         $this->setAttribute('rules', implode('|', $args));
         $this->setAttribute('required', (bool)in_array('required', $args));
+
+        return $this;
+    }
+
+    public function createRules()
+    {
+        $args = func_get_args() ?? false;
+
+        $this->setAttribute('createRules', implode('|', $args));
+        $this->setAttribute('required', (bool)in_array('required', $args));
+
+        return $this;
+    }
+
+    public function updateRules()
+    {
+        $args = func_get_args() ?? false;
+
+        $this->setAttribute('updateRules', implode('|', $args));
+        $this->setAttribute('required', (bool)in_array('required', $args));
+
+        return $this;
+    }
+
+    public function rulesMessages($message = false)
+    {
+        $this->setAttribute('messages', $message);
 
         return $this;
     }
@@ -192,7 +227,7 @@ class BaseField implements Field
                 $attributes['collections'][$property][$key] = $value;
 
 
-                if(gettype($value) === 'boolean') {
+                if (gettype($value) === 'boolean') {
                     $attributes[$key][] = $property;
                 } else {
                     $attributes[$key][$property] = $value;
@@ -202,5 +237,4 @@ class BaseField implements Field
 
         return $attributes;
     }
-
 }

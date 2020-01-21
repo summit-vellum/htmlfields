@@ -31,7 +31,7 @@
                 </div>
         </div> --}}
 
-        <div class="inline-block w-auto relative">
+        <div class="inline-block w-auto relative input-group date">
           <input
             name="{{ $attributes['id'] }}"
             type="text"
@@ -56,21 +56,37 @@
 
 
 @push('css')
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 @endpush
 
 @push('scripts')
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
-    <script type="text/javascript">
-        // $('.input-group.date').datepicker({
-        //     format: "M dd, yyyy",
-        //     maxViewMode: 2,
-        //     todayBtn: "linked",
-        //     clearBtn: true
-        // });
-        $(function () {
-            // $('#{{ $attributes['id'] }}').datetimepicker();
-        });
-    </script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+	<script type="text/javascript">
+	$(document).ready(function(){
+		var element = '#{{ $attributes['id'] }}',
+			dateNow = moment(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+			date = '{{ old($attributes['id'], $value) }}',
+			actualDate = (date) ? date : dateNow;
+
+		$(element).val(actualDate);
+		loadDatePicker(actualDate);
+
+		function loadDatePicker(date) {
+			$('.input-group.date').daterangepicker({
+			 	singleDatePicker: true,
+			 	timePicker: true,
+			 	startDate: date,
+			 	locale: {"format": 'YYYY-MM-DD HH:mm:ss'},
+			}, function(start) {
+			 	dateSelected = start.format('YYYY-MM-DD HH:mm:ss');
+	       		$(element).val(dateSelected);
+			});
+		}
+	});
+	</script>
 @endpush
