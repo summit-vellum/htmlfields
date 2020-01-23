@@ -21,6 +21,7 @@
             @if(isset($attributes['tagsinput'])) {{ $attributes['tagsinput'] }} @endif
             @if(isset($attributes['tagsinput-config'])) data-tagsinput-config="{{ $attributes['tagsinput-config'] }}" @endif
             @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
+            @isset($attributes['hideOnForms']) {{ 'hidden' }} @endisset
             />
 
     @else

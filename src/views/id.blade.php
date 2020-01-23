@@ -19,6 +19,7 @@
             id="{{ $attributes['name'] }}"
             autocomplete="off"
             @isset($attributes['required']) {{ 'required' }} @endisset
+            @isset($attributes['hideOnForms']) {{ 'hidden' }} @endisset
             />
 
     @else

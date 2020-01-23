@@ -187,6 +187,13 @@ class BaseField implements Field
         return $this;
     }
 
+    public function hideOnForms()
+    {
+        $this->setAttribute('hideOnForms', true);
+
+        return $this;
+    }
+
     public function getAllSortableFields()
     {
         return $this->sortableFields;
@@ -221,11 +228,9 @@ class BaseField implements Field
 
         $property = $this->getAttribute('id');
 
-        foreach ($this->getAttributes() as $key => $value){
-            if($attr = $this->getAttribute($key) !== null) {
-
+        foreach ($this->getAttributes() as $key => $value) {
+            if ($attr = $this->getAttribute($key) !== null) {
                 $attributes['collections'][$property][$key] = $value;
-
 
                 if (gettype($value) === 'boolean') {
                     $attributes[$key][] = $property;
