@@ -13,7 +13,7 @@
 
         <textarea
             name="{{  $attributes['id'] }}"
-            class="w-full border p-3 rounded shadow"
+            class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
             id="{{  $attributes['id'] }}"
             {{-- @isset($attributes['required']) {{ 'required' }} @endisset --}}
             @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif

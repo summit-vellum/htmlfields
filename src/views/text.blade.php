@@ -15,7 +15,7 @@
             name="{{ $attributes['id'] }}"
             type="text"
             value="{{ old($attributes['id'], $value) }}"
-            class="w-full rounded py-2 px-3 border shadow"
+            class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
             id="{{ $attributes['id'] }}"
             autocomplete="off"
             @if(isset($attributes['tagsinput'])) {{ $attributes['tagsinput'] }} @endif
