@@ -14,4 +14,18 @@ class IDField extends BaseField
 
         return $this;
     }
+
+    public function getStyle()
+    {
+        return [
+            //
+        ];
+    }
+
+    public function getScript()
+    {
+        return [
+            //
+        ];
+    }
 }
