@@ -35,16 +35,16 @@ class BaseField implements Field
         $class = strtolower(get_called_class());
         $element = last(explode('\\', $class));
 
-        $this->setAttribute('element', str_replace('field','', $element));
+        $this->setAttribute('element', str_replace('field', '', $element));
     }
 
-    public function tagsInput($options=[])
+    public function tagsInput($options = [])
     {
-    	//$apiUrl, $fields, $fieldName, $isMultiple=false
-    	$this->setAttribute('tagsinput', 'data-tagsinput');
-    	$this->setAttribute('tagsinput-config', json_encode($options));
+        //$apiUrl, $fields, $fieldName, $isMultiple=false
+        $this->setAttribute('tagsinput', 'data-tagsinput');
+        $this->setAttribute('tagsinput-config', json_encode($options));
 
-    	return $this;
+        return $this;
     }
 
     public function make($name, $slug = false)
@@ -56,7 +56,7 @@ class BaseField implements Field
         $this->setAttribute('name', $name);
 
         $this->getElementByNameByClass();
-        
+
 
         /**
          * clearResolvedInstance will make sure that the last value
@@ -72,7 +72,7 @@ class BaseField implements Field
         $args = func_get_args() ?? false;
 
         $this->setAttribute('rules', implode('|', $args));
-        $this->setAttribute('required', (bool)in_array('required', $args));
+        $this->setAttribute('required', (bool) in_array('required', $args));
 
         return $this;
     }
@@ -82,7 +82,7 @@ class BaseField implements Field
         $args = func_get_args() ?? false;
 
         $this->setAttribute('createRules', implode('|', $args));
-        $this->setAttribute('required', (bool)in_array('required', $args));
+        $this->setAttribute('required', (bool) in_array('required', $args));
 
         return $this;
     }
@@ -92,7 +92,7 @@ class BaseField implements Field
         $args = func_get_args() ?? false;
 
         $this->setAttribute('updateRules', implode('|', $args));
-        $this->setAttribute('required', (bool)in_array('required', $args));
+        $this->setAttribute('required', (bool) in_array('required', $args));
 
         return $this;
     }
@@ -218,7 +218,7 @@ class BaseField implements Field
             'field::' . $element,
             [
                 'attributes' => $this->attributes,
-                'value' => ''//($data[$field] ?? '')
+                'value' => '' //($data[$field] ?? '')
             ]
         );
     }
@@ -229,7 +229,11 @@ class BaseField implements Field
 
         $property = $this->getAttribute('id');
 
-
+        foreach ($this->getAttributes() as $key => $value) {
+            if ($attr = $this->getAttribute($key) !== null) {
+                $attributes['assets']['style'][$property] = $this->getStyle(); 
+                $attributes['assets']['script'][$property] = $this->getScript();
+                $attributes['collections'][$property][$key] = $value;
 
                 if (gettype($value) === 'boolean') {
                     $attributes[$key][] = $property;
@@ -237,7 +241,7 @@ class BaseField implements Field
                     $attributes[$key][$property] = $value;
                 }
             }
-        } 
+        }
         return $attributes;
     }
 }
