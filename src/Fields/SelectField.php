@@ -5,9 +5,9 @@ namespace Quill\Html\Fields;
 use Illuminate\Support\Facades\Cache;
 use Quill\Html\Fields\BaseField;
 use Vellum\Contracts\Form\Renderable;
+use Quill\Html\Contracts\Asset;
 
-
-class SelectField extends BaseField
+class SelectField extends BaseField implements Asset
 {
 
     public function options($options)
