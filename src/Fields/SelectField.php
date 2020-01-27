@@ -29,6 +29,7 @@ class SelectField extends BaseField implements Asset
     public function getStyle()
     {
        return   [
+       		'vendor/vellum/css/vendor/bootstrap-select.min.css'
         ];
     }
 
