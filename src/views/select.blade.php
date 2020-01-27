@@ -10,24 +10,34 @@
 
     @form
 
-        <div class="inline-block w-auto relative">
-          <select
-            name="{{ $attributes['id'] }}"
-            @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
-            id="{{ $attributes['id'] }}"
-            class="block appearance-none w-auto bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
 
-            <option value=""> -- </option>
+    		@if(isset($attributes['container']) && $attributes['container']['sectionName'])
+    			@section($attributes['container']['sectionName'])
+    		@endif
 
-            @foreach($attributes['options'] as $id => $val)
-                <option value="{{ $id }}" {{ selected($attributes, $value, $id) }}>{{ $val }}</option>
-            @endforeach
+	          <select
+	            name="{{ $attributes['id'] }}"
+	            @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
+	            id="{{ $attributes['id'] }}"
+	            class="selectpicker {{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
+	            data-style="cf-input flat">
 
-          </select>
-          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-          	@icon(['icon' => 'chevron-down'])
-          </div>
-        </div>
+	            <option value=""> -- </option>
+	            <!--  add selected function to helpers.php --- selected($attributes, $value, $id)  -->
+	            @foreach($attributes['options'] as $id => $val)
+	                <option value="{{ $id }}" {{ selected($attributes, $value, $id) }}>{{ $val }}</option>
+	            @endforeach
+
+	          </select>
+
+	        @if(isset($attributes['container']) && $attributes['container']['sectionName'])
+	        	@stop
+	        @endif
+
+	        @if(isset($attributes['container']) && $attributes['container']['view'])
+	        	{!! $attributes['container']['view'] !!}
+	        @endif
+
 
     @else
 
@@ -38,3 +48,4 @@
     @endform
 
 @endinput
+

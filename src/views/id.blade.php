@@ -13,13 +13,12 @@
 
         <input
             name="{{ $attributes['name'] }}"
-            type="text"
+            type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
             value="{{ old($attributes['name'], $value) }}"
             class="form-control"
             id="{{ $attributes['name'] }}"
             autocomplete="off"
             @isset($attributes['required']) {{ 'required' }} @endisset
-            @isset($attributes['hideOnForms']) {{ 'hidden' }} @endisset
             />
 
     @else

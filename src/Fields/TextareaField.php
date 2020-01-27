@@ -3,9 +3,9 @@
 namespace Quill\Html\Fields;
 
 use Quill\Html\Fields\BaseField;
+use Quill\Html\Contracts\Asset;
 
-
-class TextareaField extends BaseField
+class TextareaField extends BaseField implements Asset
 {
     public function getStyle()
     {

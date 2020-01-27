@@ -35,16 +35,45 @@ class BaseField implements Field
         $class = strtolower(get_called_class());
         $element = last(explode('\\', $class));
 
-        $this->setAttribute('element', str_replace('field','', $element));
+        $this->setAttribute('element', str_replace('field', '', $element));
+    }
+
+    public function classes($classes)
+    {
+    	$this->setAttribute('classes', $classes);
+
+    	return $this;
+    }
+
+    public function container($container = [])
+    {
+    	/*
+    	container array e.g
+    	[
+    		'sectionName'=>'two',
+    		'view'=> view('vellum::containers.render-select', ['yieldName'=>'two'])
+    	]
+    	*/
+    	$this->setAttribute('container', $container);
+
+    	return $this;
     }
 
     public function tagsInput($options=[])
     {
-    	//$apiUrl, $fields, $fieldName, $isMultiple=false
+    	/*
+    	options array
+   		[
+   		 'apiUrl' => '',
+		 'fields' => '',
+		 'fieldName' => '',
+		 'name' => ''
+		]
+		*/
     	$this->setAttribute('tagsinput', 'data-tagsinput');
     	$this->setAttribute('tagsinput-config', json_encode($options));
 
-    	return $this;
+        return $this;
     }
 
     public function make($name, $slug = false)
@@ -72,7 +101,7 @@ class BaseField implements Field
         $args = func_get_args() ?? false;
 
         $this->setAttribute('rules', implode('|', $args));
-        $this->setAttribute('required', (bool)in_array('required', $args));
+        $this->setAttribute('required', (bool) in_array('required', $args));
 
         return $this;
     }
@@ -82,7 +111,7 @@ class BaseField implements Field
         $args = func_get_args() ?? false;
 
         $this->setAttribute('createRules', implode('|', $args));
-        $this->setAttribute('required', (bool)in_array('required', $args));
+        $this->setAttribute('required', (bool) in_array('required', $args));
 
         return $this;
     }
@@ -92,7 +121,7 @@ class BaseField implements Field
         $args = func_get_args() ?? false;
 
         $this->setAttribute('updateRules', implode('|', $args));
-        $this->setAttribute('required', (bool)in_array('required', $args));
+        $this->setAttribute('required', (bool) in_array('required', $args));
 
         return $this;
     }
@@ -218,7 +247,7 @@ class BaseField implements Field
             'field::' . $element,
             [
                 'attributes' => $this->attributes,
-                'value' => ''//($data[$field] ?? '')
+                'value' => '' //($data[$field] ?? '')
             ]
         );
     }

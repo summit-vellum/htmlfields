@@ -5,9 +5,9 @@ namespace Quill\Html\Fields;
 use Illuminate\Support\Facades\Cache;
 use Quill\Html\Fields\BaseField;
 use Vellum\Contracts\Form\Renderable;
+use Quill\Html\Contracts\Asset;
 
-
-class SelectField extends BaseField
+class SelectField extends BaseField implements Asset
 {
 
     public function options($options)
@@ -17,7 +17,7 @@ class SelectField extends BaseField
         if(!is_array($options) && class_exists($options)) {
         	$key = 'select_'.$this->getAttribute('id');
             $values = Cache::remember($key, 60, function() use($options){
-            	return (new $options)->all()->pluck('name', 'id')->toArray(); 
+            	return (new $options)->all()->pluck('name', 'id')->toArray();
             });
         }
 
@@ -29,15 +29,15 @@ class SelectField extends BaseField
     public function getStyle()
     {
        return   [
-             // 
-        ]; 
+       		'vendor/vellum/css/vendor/bootstrap-select.min.css'
+        ];
     }
 
     public function getScript()
     {
         return   [
-            // 
-       ];  
+        	'vendor/vellum/js/vendor/bootstrap-select.min.js'
+       ];
     }
 
 }

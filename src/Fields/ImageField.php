@@ -4,8 +4,9 @@ namespace Quill\Html\Fields;
 
 use Closure;
 use Quill\Html\Fields\BaseField;
+use Quill\Html\Contracts\Asset;
 
-class ImageField extends BaseField
+class ImageField extends BaseField implements Asset
 {
     public function disk($disk)
     {
