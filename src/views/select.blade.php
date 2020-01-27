@@ -25,7 +25,7 @@
 	            <option value=""> -- </option>
 	            <!--  add selected function to helpers.php --- selected($attributes, $value, $id)  -->
 	            @foreach($attributes['options'] as $id => $val)
-	                <option value="{{ $id }}">{{ $val }}</option>
+	                <option value="{{ $id }}" {{ selected($attributes, $value, $id) }}>{{ $val }}</option>
 	            @endforeach
 
 	          </select>
