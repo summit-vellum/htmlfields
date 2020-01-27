@@ -4,9 +4,9 @@ namespace Quill\Html\Fields;
 
 use Quill\Html\Fields\BaseField;
 use Illuminate\Support\Str;
+use Quill\Html\Contracts\Asset;
 
-
-class IDField extends BaseField
+class IDField extends BaseField implements Asset
 {
     public function make($name = 'id', $slug = false)
     {
