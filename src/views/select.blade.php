@@ -10,8 +10,11 @@
 
     @form
 
-        <div class="row">
-        	<div class="col-md-6 cf-select-container">
+
+    		@if(isset($attributes['container']) && $attributes['container']['sectionName'])
+    			@section($attributes['container']['sectionName'])
+    		@endif
+
 	          <select
 	            name="{{ $attributes['id'] }}"
 	            @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
@@ -26,8 +29,15 @@
 	            @endforeach
 
 	          </select>
-	      	</div>
-        </div>
+
+	        @if(isset($attributes['container']) && $attributes['container']['sectionName'])
+	        	@stop
+	        @endif
+
+	        @if(isset($attributes['container']) && $attributes['container']['view'])
+	        	{!! $attributes['container']['view'] !!}
+	        @endif
+
 
     @else
 

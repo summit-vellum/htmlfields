@@ -13,13 +13,11 @@
 
         <input
             name="{{ $attributes['id'] }}"
-            type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
+            type="checkbox"
             value="{{ old($attributes['id'], $value) }}"
-            class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
+            class="w-full rounded py-2 px-3 border shadow"
             id="{{ $attributes['id'] }}"
             autocomplete="off"
-            @if(isset($attributes['tagsinput'])) {{ $attributes['tagsinput'] }} @endif
-            @if(isset($attributes['tagsinput-config'])) data-tagsinput-config="{{ $attributes['tagsinput-config'] }}" @endif
             @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
             />
 
@@ -32,4 +30,3 @@
     @endform
 
 @endinput
-

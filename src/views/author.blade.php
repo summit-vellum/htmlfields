@@ -8,12 +8,12 @@
         {{ $attributes['help'] ?? '' }}
     @endslot
 
-    
+
     @form
 
-        <select 
-            name="{{ $attributes['id'] }}" 
-            id="{{ $attributes['id'] }}" 
+        <select
+            name="{{ $attributes['id'] }}"
+            id="{{ $attributes['id'] }}"
             style="width: auto;"
             @isset($attributes['required']) {{ 'required' }} @endisset
             >
@@ -29,7 +29,7 @@
         </select>
 
     @else
-        
+
         <div class="my-2">
             {!! $value !!}
         </div>

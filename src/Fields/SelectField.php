@@ -17,7 +17,7 @@ class SelectField extends BaseField
         if(!is_array($options) && class_exists($options)) {
         	$key = 'select_'.$this->getAttribute('id');
             $values = Cache::remember($key, 60, function() use($options){
-            	return (new $options)->all()->pluck('name', 'id')->toArray(); 
+            	return (new $options)->all()->pluck('name', 'id')->toArray();
             });
         }
 
@@ -29,15 +29,14 @@ class SelectField extends BaseField
     public function getStyle()
     {
        return   [
-             // 
-        ]; 
+        ];
     }
 
     public function getScript()
     {
         return   [
-            // 
-       ];  
+        	'vendor/vellum/js/vendor/bootstrap-select.min.js'
+       ];
     }
 
 }

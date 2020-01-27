@@ -45,9 +45,31 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function container($container = [])
+    {
+    	/*
+    	container array e.g
+    	[
+    		'sectionName'=>'two',
+    		'view'=> view('vellum::containers.render-select', ['yieldName'=>'two'])
+    	]
+    	*/
+    	$this->setAttribute('container', $container);
+
+    	return $this;
+    }
+
     public function tagsInput($options=[])
     {
-    	//$apiUrl, $fields, $fieldName, $isMultiple=false
+    	/*
+    	options array
+   		[
+   		 'apiUrl' => '',
+		 'fields' => '',
+		 'fieldName' => '',
+		 'name' => ''
+		]
+		*/
     	$this->setAttribute('tagsinput', 'data-tagsinput');
     	$this->setAttribute('tagsinput-config', json_encode($options));
 
@@ -195,6 +217,13 @@ class BaseField implements Field
         return $this;
     }
 
+    public function hideOnForms()
+    {
+        $this->setAttribute('hideOnForms', true);
+
+        return $this;
+    }
+
     public function getAllSortableFields()
     {
         return $this->sortableFields;
@@ -235,7 +264,6 @@ class BaseField implements Field
                 $attributes['assets']['style'][$property] = $this->getStyle();
                 $attributes['assets']['script'][$property] = $this->getScript();
                 $attributes['collections'][$property][$key] = $value;
-
 
                 if (gettype($value) === 'boolean') {
                     $attributes[$key][] = $property;
