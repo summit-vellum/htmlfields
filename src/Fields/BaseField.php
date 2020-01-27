@@ -56,7 +56,7 @@ class BaseField implements Field
         $this->setAttribute('name', $name);
 
         $this->getElementByNameByClass();
-        
+
 
         /**
          * clearResolvedInstance will make sure that the last value
@@ -229,7 +229,11 @@ class BaseField implements Field
 
         $property = $this->getAttribute('id');
 
-
+        foreach ($this->getAttributes() as $key => $value) {
+            if($attr = $this->getAttribute($key) !== null) {
+                $attributes['assets']['style'][$property] = $this->getStyle();
+                $attributes['assets']['script'][$property] = $this->getScript();
+                $attributes['collections'][$property][$key] = $value;
 
                 if (gettype($value) === 'boolean') {
                     $attributes[$key][] = $property;
@@ -237,7 +241,8 @@ class BaseField implements Field
                     $attributes[$key][$property] = $value;
                 }
             }
-        } 
+        }
+
         return $attributes;
     }
 }
