@@ -18,6 +18,8 @@
             class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
             id="{{ $attributes['id'] }}"
             autocomplete="off"
+            @if(isset($attributes['tagsinput'])) {{ $attributes['tagsinput'] }} @endif
+            @if(isset($attributes['tagsinput-config'])) data-tagsinput-config="{{ $attributes['tagsinput-config'] }}" @endif
             @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
             />
 
