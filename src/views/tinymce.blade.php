@@ -80,7 +80,7 @@
                                 icon: '{{ $shortcode['text'] }}',
                                 onAction: {!! view($shortcode['text'].'::shortcode',
                                 			['shortcode' => $shortcode])->render() !!}
-                            }
+                            },
                             @endforeach
                             ];
 
