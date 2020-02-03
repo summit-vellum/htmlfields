@@ -13,5 +13,6 @@ return [
         'Quill\Html\Fields\ImageField',
         'Quill\Html\Fields\SelectField',
         'Quill\Html\Fields\TinymceField',
+        'Quill\Html\Fields\TagsinputField',
     ]
 ];
