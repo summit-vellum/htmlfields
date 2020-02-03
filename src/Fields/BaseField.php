@@ -258,8 +258,8 @@ class BaseField implements Field
 
         $property = $this->getAttribute('id');
 
-        foreach ($this->getAttributes() as $key => $value){
-            if ($attr = $this->getAttribute($key) !== null) {
+        foreach ($this->getAttributes() as $key => $value) {
+            if($attr = $this->getAttribute($key) !== null) {
                 $attributes['assets']['style'][$property] = $this->getStyle();
                 $attributes['assets']['script'][$property] = $this->getScript();
                 $attributes['collections'][$property][$key] = $value;
@@ -271,6 +271,7 @@ class BaseField implements Field
                 }
             }
         }
+
         return $attributes;
     }
 }
