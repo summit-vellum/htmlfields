@@ -224,6 +224,35 @@ class BaseField implements Field
         return $this;
     }
 
+    public function maxCharacters($max = false)
+    {
+        $this->setAttribute('max-characters', $max);
+
+        return $this;
+    }
+
+    public function maxCharactersHelp($help = false)
+    {
+        $this->setAttribute('max-characters-help', $help);
+
+        return $this;
+    }
+
+    public function autoSlug()
+    {
+        $this->setAttribute('autoslug-src', $this->attributes['id']);
+
+        return $this;
+    }
+
+    public function autoSlugSource($id = false, $trigger = 'on')
+    {
+        $this->setAttribute('autoslug', $id);
+        $this->setAttribute('autoslug-once', $trigger);
+
+        return $this;
+    }
+
     public function getAllSortableFields()
     {
         return $this->sortableFields;
