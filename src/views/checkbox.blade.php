@@ -8,6 +8,14 @@
         {{ $attributes['help'] ?? '' }}
     @endslot
 
+    @slot('required')
+        {{ isset($attributes['required']) ? true : '' }}
+    @endslot
+
+    @slot('customLabel')
+        {{ $attributes['label-classes'] ?? '' }}
+    @endslot
+
 
     @form
 
@@ -18,7 +26,10 @@
             class="w-full rounded py-2 px-3 border shadow"
             id="{{ $attributes['id'] }}"
             autocomplete="off"
-            @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
+            
+            @foreach(config('form.attributes') as $attr)
+                {{ isset($attributes[$attr]) ? $attr : '' }}
+            @endforeach
             />
 
     @else

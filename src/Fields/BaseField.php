@@ -99,9 +99,15 @@ class BaseField implements Field
     public function rules()
     {
         $args = func_get_args() ?? false;
+        $attributes = config('form.attributes');
 
         $this->setAttribute('rules', implode('|', $args));
-        $this->setAttribute('required', (bool) in_array('required', $args));
+
+        foreach ($attributes as $attr) {
+            if (in_array($attr, $args)) {
+                $this->setAttribute($attr, (bool) in_array($attr, $args));
+            }
+        }
 
         return $this;
     }
@@ -244,6 +250,20 @@ class BaseField implements Field
     {
         $this->setAttribute('autoslug', $id);
         $this->setAttribute('autoslug-once', $trigger);
+
+        return $this;
+    }
+
+    public function placeholder($text = false)
+    {
+        $this->setAttribute('placeholder', $text);
+
+        return $this;
+    }
+
+    public function customLabelClasses($classes = false)
+    {
+        $this->setAttribute('label-classes', $classes);
 
         return $this;
     }

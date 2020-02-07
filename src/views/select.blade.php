@@ -8,6 +8,14 @@
         {{ $attributes['help'] ?? '' }}
     @endslot
 
+    @slot('required')
+        {{ isset($attributes['required']) ? true : '' }}
+    @endslot
+
+    @slot('customLabel')
+        {{ $attributes['label-classes'] ?? '' }}
+    @endslot
+
     @form
 
 
@@ -17,10 +25,13 @@
 
 	          <select
 	            name="{{ $attributes['id'] }}"
-	            @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
 	            id="{{ $attributes['id'] }}"
 	            class="selectpicker {{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
-	            data-style="cf-input flat">
+	            data-style="cf-input flat"
+				@foreach(config('form.attributes') as $attr)
+					{{ isset($attributes[$attr]) ? $attr : '' }}
+				@endforeach
+	            >
 
 	            <option value=""> -- </option>
 	            <!--  add selected function to helpers.php --- selected($attributes, $value, $id)  -->

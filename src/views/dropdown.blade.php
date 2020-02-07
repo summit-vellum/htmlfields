@@ -6,13 +6,24 @@
     @slot('help')
         {{ $data['help'] ?? '' }}
     @endslot
+
+    @slot('required')
+        {{ isset($attributes['required']) ? true : '' }}
+    @endslot
+
+    @slot('customLabel')
+        {{ $attributes['label-classes'] ?? '' }}
+    @endslot
     
     <select 
         name="{{ $name }}" 
         class="custom-select" 
         id="{{ $name }}" 
         style="width: auto;"
-        @isset($attributes['required']) {{ 'required' }} @endisset
+        
+        @foreach(config('form.attributes') as $attr)
+            {{ isset($attributes[$attr]) ? $attr : '' }}
+        @endforeach
         >
         <option value=""> -- </option>
     

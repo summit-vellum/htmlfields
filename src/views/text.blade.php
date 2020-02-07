@@ -19,8 +19,13 @@
     @slot('required')
         {{ isset($attributes['required']) ? true : '' }}
     @endslot
+
+    @slot('customLabel')
+        {{ $attributes['label-classes'] ?? '' }}
+    @endslot
     
     @form
+
 
         <input
             name="{{ $attributes['id'] }}"
@@ -30,10 +35,15 @@
             id="{{ $attributes['id'] }}"
             min-count="{{ isset($attributes['min-count']) ? $attributes['min-count'] : '' }}"
             max-count="{{ isset($attributes['max-count']) ? $attributes['max-count'] : '' }}"
+            placeholder="{{ isset($attributes['placeholder']) ? $attributes['placeholder'] : '' }}"
             {{ isset($attributes['autoslug-src']) ? 'autoslug='.$attributes['autoslug-src'] : '' }}
             autocomplete="off"
+
+            @foreach(config('form.attributes') as $attr)
+                {{ isset($attributes[$attr]) ? $attr : '' }}
+            @endforeach
+
             {{ isset($attributes['autoslug']) ? 'autoslug-' . $attributes['autoslug'] . '=' . $attributes['autoslug-once'] : '' }}
-            {{ isset($attributes['required']) ? 'required' : '' }}
             />
 
     @else
