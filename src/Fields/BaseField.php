@@ -224,16 +224,11 @@ class BaseField implements Field
         return $this;
     }
 
-    public function maxCharacters($max = false)
+    public function characterCount($min= false, $max = false, $help = false)
     {
-        $this->setAttribute('max-characters', $max);
-
-        return $this;
-    }
-
-    public function maxCharactersHelp($help = false)
-    {
-        $this->setAttribute('max-characters-help', $help);
+        $this->setAttribute('min-count', $min);
+        $this->setAttribute('max-count', $max);
+        $this->setAttribute('max-count-help', $help);
 
         return $this;
     }

@@ -8,14 +8,18 @@
         {{ $attributes['help'] ?? '' }}
     @endslot
 
-    @slot('maxCharacters')
-        {{ $attributes['max-characters'] ?? '' }}
+    @slot('maxCount')
+        {{ $attributes['max-count'] ?? '' }}
     @endslot
 
-    @slot('maxCharactersHelp')
-        {{ $attributes['max-characters-help'] ?? '' }}
+    @slot('maxCountHelp')
+        {{ $attributes['max-count-help'] ?? '' }}
     @endslot
 
+    @slot('required')
+        {{ isset($attributes['required']) ? true : '' }}
+    @endslot
+    
     @form
 
         <input
@@ -24,11 +28,12 @@
             value="{{ old($attributes['id'], $value) }}"
             class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
             id="{{ $attributes['id'] }}"
-            max-characters="{{ isset($attributes['max-characters']) ? $attributes['max-characters'] : '' }}"
+            min-count="{{ isset($attributes['min-count']) ? $attributes['min-count'] : '' }}"
+            max-count="{{ isset($attributes['max-count']) ? $attributes['max-count'] : '' }}"
             {{ isset($attributes['autoslug-src']) ? 'autoslug='.$attributes['autoslug-src'] : '' }}
             autocomplete="off"
             {{ isset($attributes['autoslug']) ? 'autoslug-' . $attributes['autoslug'] . '=' . $attributes['autoslug-once'] : '' }}
-            @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
+            {{ isset($attributes['required']) ? 'required' : '' }}
             />
 
     @else
