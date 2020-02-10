@@ -29,14 +29,14 @@ class SelectField extends BaseField implements Asset
     public function getStyle()
     {
        return   [
-       		'vendor/vellum/css/vendor/bootstrap-select.min.css'
+       		'vendor/html/css/bootstrap-select.min.css'
         ];
     }
 
     public function getScript()
     {
         return   [
-        	'vendor/vellum/js/vendor/bootstrap-select.min.js'
+        	'vendor/html/js/bootstrap-select.min.js'
        ];
     }
 
