@@ -24,6 +24,10 @@
         {{ $attributes['label-classes'] ?? '' }}
     @endslot
 
+    @slot('uniqueMsg')
+        {{ $attributes['unique-message'] ?? '' }}
+    @endslot
+
 
     @form
 
@@ -34,6 +38,7 @@
             min-count="{{ isset($attributes['min-count']) ? $attributes['min-count'] : '' }}"
             max-count="{{ isset($attributes['max-count']) ? $attributes['max-count'] : '' }}"
             placeholder="{{ isset($attributes['placeholder']) ? $attributes['placeholder'] : '' }}"
+            unique-message="{{ isset($attributes['unique-message']) ? $attributes['unique-message'] : '' }}"
             {{ isset($attributes['autoslug-src']) ? 'autoslug='.$attributes['autoslug-src'] : '' }}
             {{ isset($attributes['autoslug']) ? 'autoslug-' . $attributes['autoslug'] . '=' . $attributes['autoslug-once'] : '' }}
 
