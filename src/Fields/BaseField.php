@@ -38,6 +38,13 @@ class BaseField implements Field
         $this->setAttribute('element', str_replace('field', '', $element));
     }
 
+    public function displayDashboardNotif()
+    {
+    	 $this->setAttribute('displayDashboardNotif', true);
+
+        return $this;
+    }
+
     public function classes($classes)
     {
     	$this->setAttribute('classes', $classes);
