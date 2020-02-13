@@ -268,6 +268,13 @@ class BaseField implements Field
         return $this;
     }
 
+    public function uniqueChecker($text = false)
+    {
+        $this->setAttribute('unique-message', $text);
+
+        return $this;
+    }
+
     public function customLabelClasses($classes = false)
     {
         $this->setAttribute('label-classes', $classes);
