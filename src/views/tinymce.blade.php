@@ -8,7 +8,6 @@
 
     @form
 
-
         <textarea
             name="{{ $attributes['id'] }}"
             class="form-control"
@@ -36,11 +35,6 @@
             @stack('shortcode_scripts')
         </script>
         <script>
-
-        	function closeModal(){
-        		$('#modal').addClass('hidden');
-        	}
-
             tinymce.init({
                 selector:'#{{ $attributes['id'] }}',
                 height: 500,
@@ -92,16 +86,6 @@
                 }
             });
 
-            document.querySelector('#insert-shortcode').addEventListener('click', function(event){
-        		var iframe = document.querySelector('[name="modal"]');
-
-        		var shortcode = iframe.contentWindow.document.querySelector('#shortcode').value;
-        		tinymce.get('content').execCommand('mceInsertContent', false, shortcode);
-
-        		closeModal();
-
-            	event.preventDefault();
-            });
 
         </script>
     @endpush

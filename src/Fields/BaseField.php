@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\Str;
+use Illuminate\Support\HtmlString;
 use Quill\Html\Contracts\Field;
 
 class BaseField implements Field
@@ -40,7 +41,7 @@ class BaseField implements Field
 
     public function displayDashboardNotif()
     {
-    	 $this->setAttribute('displayDashboardNotif', true);
+    	$this->setAttribute('displayDashboardNotif', true);
 
         return $this;
     }
@@ -290,6 +291,17 @@ class BaseField implements Field
     public function setHtmlAttributes($property, $value)
     {
         $this->htmlAttributes[$property] = $value;
+    }
+
+    /**
+     * Usage: shortcode modal
+     * Add this to the field you want be shown in selected list when a row is clicked in a modal
+     */
+    public function fieldSelected()
+    {
+    	$this->setAttribute('fieldSelected', true);
+
+    	return $this;
     }
 
     public function render()
