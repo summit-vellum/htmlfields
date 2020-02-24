@@ -1,5 +1,5 @@
 
-@input(['id' => $attributes['id']])
+@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
     @slot('label')
         {{ $attributes['name'] }}
     @endslot
@@ -26,7 +26,7 @@
             class="w-full rounded py-2 px-3 border shadow"
             id="{{ $attributes['id'] }}"
             autocomplete="off"
-            
+
             @foreach(config('form.attributes') as $attr)
                 {{ isset($attributes[$attr]) ? $attr : '' }}
             @endforeach

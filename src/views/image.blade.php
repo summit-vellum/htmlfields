@@ -1,5 +1,5 @@
 
-@input(['id' => $attributes['id']])
+@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
     @slot('label')
         {{ $attributes['name'] }}
     @endslot
@@ -9,13 +9,13 @@
     @endslot
 
     @form
-    
+
       {{--   <div class="custom-file" style="width: auto;">
             <input type="text" name="{{ $attributes['id'] }}" value="{{ old($attributes['id'], $value) }}" >
-            <input 
-                type="file" 
-                class="custom-file-input" 
-                id="{{ $attributes['id'] }}" 
+            <input
+                type="file"
+                class="custom-file-input"
+                id="{{ $attributes['id'] }}"
                 style="width: auto;"
                 @isset($attributes['required']) {{ 'required' }} @endisset
                 onchange="readURL(this);"
@@ -24,19 +24,19 @@
         </div> --}}
 
         <div class="">
-          <input 
+          <input
             name="{{ $attributes['id'] }}-uploader"
-            type="file" 
+            type="file"
             {{-- value="{{ old($attributes['id'], $value) }}"  --}}
-            id="{{ $attributes['id'] }}-uploader" 
+            id="{{ $attributes['id'] }}-uploader"
             onchange="readURL(this);"
             {{-- @isset($attributes['required']) {{ 'required' }} @endisset --}}
             @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
-            class="hidden" 
+            class="hidden"
             {{-- class="block appearance-none w-auto bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"  --}}
             >
             <div class="inline-block">
-              <label for="{{ $attributes['id'] }}-uploader" 
+              <label for="{{ $attributes['id'] }}-uploader"
                 class="flex item-center cursor-pointer rounded px-4 py-2 bg-blue-500 w-auto text-white font-semibold"
                 {{-- class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 py-2 text-gray-700" --}}
                 >
@@ -44,9 +44,9 @@
                 <span>Upload</span>
               </label>
             </div>
-            <input type="text" name="{{ $attributes['id'] }}" id="{{ $attributes['id'] }}" value="{{ old($attributes['id'], $value) }}" 
+            <input type="text" name="{{ $attributes['id'] }}" id="{{ $attributes['id'] }}" value="{{ old($attributes['id'], $value) }}"
                 class="py-2 px-3 border-none w-64 focus:border-none"
-                readonly 
+                readonly
             >
         </div>
 

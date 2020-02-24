@@ -1,4 +1,4 @@
-@input(['id' => $name])
+@input(['id' => $name, 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
     @slot('label')
         {{ $data['label'] }}
     @endslot
@@ -14,19 +14,19 @@
     @slot('customLabel')
         {{ $attributes['label-classes'] ?? '' }}
     @endslot
-    
-    <select 
-        name="{{ $name }}" 
-        class="custom-select" 
-        id="{{ $name }}" 
+
+    <select
+        name="{{ $name }}"
+        class="custom-select"
+        id="{{ $name }}"
         style="width: auto;"
-        
+
         @foreach(config('form.attributes') as $attr)
             {{ isset($attributes[$attr]) ? $attr : '' }}
         @endforeach
         >
         <option value=""> -- </option>
-    
+
         @foreach($data['values'] as $id => $val)
             <option value="{{ $id }}" {{ (old($name, $value) == $id) ? "selected" : "" }}>{{ $val }}</option>
         @endforeach
