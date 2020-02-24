@@ -60,6 +60,16 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function setLabelElement($element)
+    {
+    	/**
+    	 * $element = label, h2 so on
+    	 */
+    	$this->setAttribute('labelElement', $element);
+
+    	return $this;
+    }
+
     public function container($container = [])
     {
     	/*
