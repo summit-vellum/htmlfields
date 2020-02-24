@@ -13,8 +13,7 @@ if(!function_exists('display_column'))
   		$module = explode('.', Route::current()->getName())[0];
         $columnField = $column['name'];
 
-        if(array_key_exists('sortable', $column)) {
-
+        if (array_key_exists('sortable', $column)) {
             $sort['sort_field'] = $column['id'];
             $query = http_build_query($sort);
 
