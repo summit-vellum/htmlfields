@@ -39,6 +39,13 @@ class BaseField implements Field
         $this->setAttribute('element', str_replace('field', '', $element));
     }
 
+    public function displayAsEdit()
+    {
+    	$this->setAttribute('displayAsEdit', true);
+
+    	return $this;
+    }
+
     public function displayDashboardNotif()
     {
     	$this->setAttribute('displayDashboardNotif', true);
