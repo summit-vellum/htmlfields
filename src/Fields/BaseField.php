@@ -240,6 +240,8 @@ class BaseField implements Field
 
     public function hideOnForms()
     {
+    	//If does not hide the whole container try checking the view file
+    	//'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '' should be appended to @input()
         $this->setAttribute('hideOnForms', true);
 
         return $this;
