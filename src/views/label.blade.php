@@ -3,6 +3,8 @@
     @form
     	@if(isset($attributes['labelElement']))
         	<{{$attributes['labelElement']}}>{{ old($attributes['name'], $value) }}</{{$attributes['labelElement']}}>
+       	@else
+       		<label>{{ old($attributes['name'], $value) }}</label>
         @endif
     @else
         <div>
