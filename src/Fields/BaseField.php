@@ -39,8 +39,21 @@ class BaseField implements Field
         $this->setAttribute('element', str_replace('field', '', $element));
     }
 
+    public function dashboardContainerClass($classes)
+    {
+    	/**
+    	 * Sets class of field's container in dashboard - targeted on <td></td>
+    	 */
+    	$this->setAttribute('dashboardContainerClass', $classes);
+
+    	return $this;
+    }
+
     public function displayAsEdit()
     {
+    	/**
+    	 * makes a field an entry point for edit in dashboard
+    	 */
     	$this->setAttribute('displayAsEdit', true);
 
     	return $this;
