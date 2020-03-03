@@ -15,5 +15,6 @@ return [
         'Quill\Html\Fields\TinymceField',
         'Quill\Html\Fields\TagsinputField',
         'Quill\Html\Fields\LabelField',
+        'Quill\Html\Fields\ToggleField',
     ]
 ];
