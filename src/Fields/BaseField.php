@@ -49,6 +49,13 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function tinymceRows($rows)
+    {
+    	$this->setAttribute('tinymceRows', $rows);
+
+    	return $this;
+    }
+
     public function displayAsEdit()
     {
     	/**

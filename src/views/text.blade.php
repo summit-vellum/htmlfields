@@ -30,27 +30,38 @@
 
     @form
 
+    	  @if(isset($attributes['container']) && $attributes['container']['sectionName'])
+			@section($attributes['container']['sectionName'])
+		  @endif
 
-        <input
-            name="{{ $attributes['id'] }}"
-            type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
-            value="{{ old($attributes['id'], $value) }}"
-            class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
-            id="{{ $attributes['id'] }}"
-            min-count="{{ isset($attributes['min-count']) ? $attributes['min-count'] : '' }}"
-            max-count="{{ isset($attributes['max-count']) ? $attributes['max-count'] : '' }}"
-            placeholder="{{ isset($attributes['placeholder']) ? $attributes['placeholder'] : '' }}"
-            unique-message="{{ isset($attributes['unique-message']) ? $attributes['unique-message'] : '' }}"
-            {{ isset($attributes['unique-message']) ? 'unique-message='.$attributes['unique-message'] : '' }}
-            {{ isset($attributes['autoslug-src']) ? 'autoslug='.$attributes['autoslug-src'] : '' }}
-            autocomplete="off"
+	        <input
+	            name="{{ $attributes['id'] }}"
+	            type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
+	            value="{{ old($attributes['id'], $value) }}"
+	            class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
+	            id="{{ $attributes['id'] }}"
+	            min-count="{{ isset($attributes['min-count']) ? $attributes['min-count'] : '' }}"
+	            max-count="{{ isset($attributes['max-count']) ? $attributes['max-count'] : '' }}"
+	            placeholder="{{ isset($attributes['placeholder']) ? $attributes['placeholder'] : '' }}"
+	            unique-message="{{ isset($attributes['unique-message']) ? $attributes['unique-message'] : '' }}"
+	            {{ isset($attributes['unique-message']) ? 'unique-message='.$attributes['unique-message'] : '' }}
+	            {{ isset($attributes['autoslug-src']) ? 'autoslug='.$attributes['autoslug-src'] : '' }}
+	            autocomplete="off"
 
-            @foreach(config('form.attributes') as $attr)
-                {{ isset($attributes[$attr]) ? $attr : '' }}
-            @endforeach
+	            @foreach(config('form.attributes') as $attr)
+	                {{ isset($attributes[$attr]) ? $attr : '' }}
+	            @endforeach
 
-            {{ isset($attributes['autoslug']) ? 'autoslug-' . $attributes['autoslug'] . '=' . $attributes['autoslug-once'] : '' }}
-            />
+	            {{ isset($attributes['autoslug']) ? 'autoslug-' . $attributes['autoslug'] . '=' . $attributes['autoslug-once'] : '' }}
+	            />
+
+            @if(isset($attributes['container']) && $attributes['container']['sectionName'])
+	        	@stop
+	        @endif
+
+	        @if(isset($attributes['container']) && $attributes['container']['view'])
+	        	{!! $attributes['container']['view'] !!}
+	        @endif
 
     @else
 
