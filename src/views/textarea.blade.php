@@ -46,7 +46,7 @@
                 {{ isset($attributes[$attr]) ? $attr : '' }}
             @endforeach
 
-            />{{ old($attributes['id'], $value) }}</textarea>
+            />@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{ old($attributes['id'], $value) }}@endif</textarea>
 
     @else
 

@@ -22,7 +22,7 @@
             class="form-control"
             id="{{ $attributes['id'] }}"
             @isset($attributes['required']) {{ 'required' }} @endisset
-            />{{ old($attributes['id'], $value) }}</textarea>
+            />{!! old($attributes['id'], $value) !!}</textarea>
 
             @if(isset($attributes['container']) && $attributes['container']['sectionName'])
 	        	@stop

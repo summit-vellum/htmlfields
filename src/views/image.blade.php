@@ -26,7 +26,7 @@
 	      <label for="{{ $attributes['id'] }}-uploader"
 	        class="btn btn-success btn-block cf-button"
 	        >
-	        <span>+ Add Main Image</span>
+	        <span>{{ $attributes['label'] }}</span>
 	      </label>
 
 	        <input type="text" name="{{ $attributes['id'] }}" id="{{ $attributes['id'] }}" value="{{ old($attributes['id'], $value) }}"

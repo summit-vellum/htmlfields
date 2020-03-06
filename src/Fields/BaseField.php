@@ -73,6 +73,20 @@ class BaseField implements Field
         return $this;
     }
 
+    /**
+     * Table header width
+     *
+     * @param      <type>  $width  The width
+     *
+     * @return     self    ( description_of_the_return_value )
+     */
+    public function thWidthAttribute($width)
+    {
+    	$this->setAttribute('thWidth', $width);
+
+    	return $this;
+    }
+
     public function classes($classes)
     {
     	$this->setAttribute('classes', $classes);
@@ -315,6 +329,13 @@ class BaseField implements Field
         $this->setAttribute('unique-message', $text);
 
         return $this;
+    }
+
+    public function label($label)
+    {
+    	$this->setAttribute('label', $label);
+
+    	return $this;
     }
 
     public function customLabelClasses($classes = false)
