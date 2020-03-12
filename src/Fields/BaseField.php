@@ -73,6 +73,13 @@ class BaseField implements Field
         return $this;
     }
 
+    public function setJs($jrArray =[])
+    {
+    	$this->setAttribute('js', $jrArray);
+
+    	return $this;
+    }
+
     /**
      * Table header width
      *
@@ -90,6 +97,13 @@ class BaseField implements Field
     public function classes($classes)
     {
     	$this->setAttribute('classes', $classes);
+
+    	return $this;
+    }
+
+    public function setStaticValue($value)
+    {
+    	$this->setAttribute('staticValue', $value);
 
     	return $this;
     }
@@ -390,10 +404,12 @@ class BaseField implements Field
 
         $property = $this->getAttribute('id');
 
+        $js = ($this->getAttribute('js'))?:[];
+
         foreach ($this->getAttributes() as $key => $value) {
             if($attr = $this->getAttribute($key) !== null) {
                 $attributes['assets']['style'][$property] = $this->getStyle();
-                $attributes['assets']['script'][$property] = $this->getScript();
+                $attributes['assets']['script'][$property] = array_merge($this->getScript(), $js);
                 $attributes['collections'][$property][$key] = $value;
 
                 if (gettype($value) === 'boolean') {

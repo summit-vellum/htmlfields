@@ -1,10 +1,24 @@
 @input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
 
     @form
-    	@if(isset($attributes['labelElement']))
-        	<{{$attributes['labelElement']}}>{{ old($attributes['name'], $value) }}</{{$attributes['labelElement']}}>
-       	@else
-       		<label>{{ old($attributes['name'], $value) }}</label>
+	  	@if(isset($attributes['container']) && $attributes['container']['sectionName'])
+			@section($attributes['container']['sectionName'])
+	  	@endif
+
+	       	@if(isset($attributes['staticValue']) && isset($attributes['labelElement']))
+	       		<{{$attributes['labelElement']}} class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}">{{ $attributes['staticValue'] }}</{{$attributes['labelElement']}}>
+	       	@elseif(isset($attributes['labelElement']))
+	        	<{{$attributes['labelElement']}} class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}">@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{ old($attributes['id'], $value) }}@endif</{{$attributes['labelElement']}}>
+	       	@else
+	       		<label>@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{ old($attributes['id'], $value) }}@endif</label>
+	        @endif
+
+	    @if(isset($attributes['container']) && $attributes['container']['sectionName'])
+        	@stop
+        @endif
+
+        @if(isset($attributes['container']) && $attributes['container']['view'])
+        	{!! $attributes['container']['view'] !!}
         @endif
     @else
         <div>

@@ -37,7 +37,7 @@
 	        <input
 	            name="{{ $attributes['id'] }}"
 	            type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
-	            value="{{ old($attributes['id'], $value) }}"
+	            value="@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{old($attributes['id'], $value)}}@endif"
 	            class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
 	            id="{{ $attributes['id'] }}"
 	            min-count="{{ isset($attributes['min-count']) ? $attributes['min-count'] : '' }}"

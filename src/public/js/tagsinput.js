@@ -10,27 +10,32 @@ $(document).ready(function(){
 	    });
 	}
 
-
 	var initTagsInput = function(element, index) {
 		var config = $(element).data('tagsinputConfig'),
 			id = $(element).attr('id'),
 			isMultiple = (typeof config.isMultiple !== 'undefined') ? config.isMultiple : true,
-			options = settings = {};
+			options = settings = {},
+			urlQueryKeyword = (typeof config.urlQueryKeyword !== 'undefined') ? config.urlQueryKeyword : '&q';
 
 		elTagsInput[index] = new Bloodhound({
 		  datumTokenizer: Bloodhound.tokenizers.obj.whitespace(config.fieldName),
 		  queryTokenizer: Bloodhound.tokenizers.whitespace,
 		  remote: {
 			url: config.apiUrl
-				 + ((typeof config.fields !== 'undefined') ? '?fields=' + config.fields : ''),
+				 + ((typeof config.fields !== 'undefined') ? '?fields=' + config.fields : '')
+				 + ((typeof config.visibility !== 'undefined') ? '&visibility=' + config.visibility : ''),
 			wildcard: '%QUERY%',
 			rateLimitBy: 'debounce',
 	        rateLimitWait: 300,
 	        replace: function(url, query) {
-	        	return url+'&q='+query;
+	        	return url+urlQueryKeyword+'='+query;
 	        },
 			filter: function(item) {
-				return item.data;
+				if (typeof getSeoTopic !== 'undefined' && config.name == 'seo_topic') {
+					return (item) ? getSeoTopic(item) : {};
+				} else {
+					return item.data;
+				}
 			}
 		  }
 		});
@@ -40,18 +45,33 @@ $(document).ready(function(){
 		options = {
 				name: config.name,
 				displayKey: config.fieldName,
-				source: elTagsInput[index].ttAdapter()
+				source: elTagsInput[index].ttAdapter(),
+				templates: {
+		            suggestion: function(data){
+		                if(!config.isObj) {
+		                    return '<ul><li class="text-left"><span>' + data[config.fieldName] +'</span>'+
+		                    '<span class="pull-right">' + data[config.fieldCountName] + '</span></li></ul>';
+		                }else{
+		                    return '<div class="text-left"><span>' + data[config.fieldName] + '</span></div>';
+		                }
+		            }
+		        }
 			};
+
+		if (!config.isObj) {
+			$.extend(options, {valueKey: config.fieldName});
+		}
 
 		settings = {
 			typeaheadjs: [{preventPost: true}, options]
 		};
 
-		$.extend(settings, {
+		if (config.isObj) {
+			$.extend(settings, {
 				itemValue: config.fieldName,
 	            itemText: config.fieldName,
 	        });
-
+		}
 
 		$(element).tagsinput(settings);
 
@@ -70,12 +90,19 @@ $(document).ready(function(){
 
 		var target = $('#'+config.name+'List');
 		$(element).change(function() {
-			target.val(JSON.stringify($(element).tagsinput('items')));
+			var items = config.isObj
+                    ? JSON.stringify($(element).tagsinput('items'))
+                    : $(element).tagsinput('items');
+			target.val(items);
 		});
 
 		if (target.val() !== '') {
 	        var selected = target.val();
-	        selected = $.parseJSON(selected);
+	        if (!config.isObj) {
+	        	selected = selected.split(',');
+	        } else {
+	        	selected = $.parseJSON(selected);
+	        }
 	        setTagsInput(element, selected);
 	    }
 	}
