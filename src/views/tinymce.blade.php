@@ -1,4 +1,6 @@
-@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+@input(['id' => $attributes['id'],
+'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '',
+'attributes' => ($attributes ?? '')])
     @slot('label')
         {{ $attributes['name'] }}
     @endslot
@@ -12,25 +14,14 @@
     @endslot
 
     @form
-    	  @if(isset($attributes['container']) && $attributes['container']['sectionName'])
-			@section($attributes['container']['sectionName'])
-		  @endif
 
-        	<textarea
-        	rows="{{ isset($attributes['tinymceRows']) ? $attributes['tinymceRows'] : '' }}"
-            name="{{ $attributes['id'] }}"
-            class="form-control"
-            id="{{ $attributes['id'] }}"
-            @isset($attributes['required']) {{ 'required' }} @endisset
-            />{!! old($attributes['id'], $value) !!}</textarea>
-
-            @if(isset($attributes['container']) && $attributes['container']['sectionName'])
-	        	@stop
-	        @endif
-
-	        @if(isset($attributes['container']) && $attributes['container']['view'])
-	        	{!! $attributes['container']['view'] !!}
-	        @endif
+    	<textarea
+    	rows="{{ isset($attributes['tinymceRows']) ? $attributes['tinymceRows'] : '' }}"
+        name="{{ $attributes['id'] }}"
+        class="form-control"
+        id="{{ $attributes['id'] }}"
+        @isset($attributes['required']) {{ 'required' }} @endisset
+        />{!! old($attributes['id'], $value) !!}</textarea>
 
     @else
 

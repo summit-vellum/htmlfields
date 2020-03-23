@@ -1,5 +1,7 @@
 
-@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+@input(['id' => $attributes['id'],
+'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '',
+'attributes' => ($attributes ?? '')])
     @slot('label')
         {{ $attributes['name'] }}
     @endslot
@@ -18,36 +20,23 @@
 
     @form
 
+      <select
+        name="{{ $attributes['id'] }}"
+        id="{{ $attributes['id'] }}"
+        class="selectpicker {{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
+        data-style="cf-input flat"
+		@foreach(config('form.attributes') as $attr)
+			{{ isset($attributes[$attr]) ? $attr : '' }}
+		@endforeach
+        >
 
-    		@if(isset($attributes['container']) && $attributes['container']['sectionName'])
-    			@section($attributes['container']['sectionName'])
-    		@endif
+        <option value=""> -- </option>
+        <!--  add selected function to helpers.php --- selected($attributes, $value, $id)  -->
+        @foreach($attributes['options'] as $id => $val)
+            <option value="{{ $id }}" {{ selected($attributes, $value, $id) }}>{{ $val }}</option>
+        @endforeach
 
-	          <select
-	            name="{{ $attributes['id'] }}"
-	            id="{{ $attributes['id'] }}"
-	            class="selectpicker {{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
-	            data-style="cf-input flat"
-				@foreach(config('form.attributes') as $attr)
-					{{ isset($attributes[$attr]) ? $attr : '' }}
-				@endforeach
-	            >
-
-	            <option value=""> -- </option>
-	            <!--  add selected function to helpers.php --- selected($attributes, $value, $id)  -->
-	            @foreach($attributes['options'] as $id => $val)
-	                <option value="{{ $id }}" {{ selected($attributes, $value, $id) }}>{{ $val }}</option>
-	            @endforeach
-
-	          </select>
-
-	        @if(isset($attributes['container']) && $attributes['container']['sectionName'])
-	        	@stop
-	        @endif
-
-	        @if(isset($attributes['container']) && $attributes['container']['view'])
-	        	{!! $attributes['container']['view'] !!}
-	        @endif
+      </select>
 
 
     @else

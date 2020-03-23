@@ -1,5 +1,7 @@
 
-@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+@input(['id' => $attributes['id'],
+'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '',
+'attributes' => ($attributes ?? '')])
     @slot('label')
         {{ $attributes['name'] }}
     @endslot
@@ -9,10 +11,6 @@
     @endslot
 
     @form
-
-      @if(isset($attributes['container']) && $attributes['container']['sectionName'])
-		@section($attributes['container']['sectionName'])
-	  @endif
 
 	      <input
 	        name="{{ $attributes['id'] }}-uploader"
@@ -33,16 +31,6 @@
 	            class="py-2 px-3 border-none w-64 focus:border-none hidden"
 	            readonly
 	        >
-
-        @if(isset($attributes['container']) && $attributes['container']['sectionName'])
-        	@stop
-        @endif
-
-        @if(isset($attributes['container']) && $attributes['container']['view'])
-        	{!! $attributes['container']['view'] !!}
-        @endif
-
-
 
     @endform
 
