@@ -132,6 +132,14 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function yieldAt($yieldName)
+    {
+    	/* Yields html field to desired page location */
+    	$this->setAttribute('yieldAt', $yieldName);
+
+    	return $this;
+    }
+
     public function tagsInput($options=[])
     {
     	/*
@@ -195,6 +203,13 @@ class BaseField implements Field
         return $this;
     }
 
+    public function dateConfig($config)
+    {
+    	$this->setAttribute('data-config', json_encode($config));
+
+    	return $this;
+    }
+
     public function updateRules()
     {
         $args = func_get_args() ?? false;
@@ -222,6 +237,13 @@ class BaseField implements Field
     public function hideFromIndex()
     {
         $this->setAttribute('hideFromIndex', true);
+
+        return $this;
+    }
+
+    public function labelClasses($classes)
+    {
+    	$this->setAttribute('labelClasses', $classes);
 
         return $this;
     }

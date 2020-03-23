@@ -1,31 +1,12 @@
+@form
+	@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+	    @slot('label')
+	        {{ $attributes['name'] }}
+	    @endslot
 
-@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
-    @slot('label')
-        {{ $attributes['name'] }}
-    @endslot
-
-    @slot('help')
-        {{ $attributes['help'] ?? '' }}
-    @endslot
-
-
-    @form
-    	@php
-    		$relationshipData = '';
-    	@endphp
-
-    	@if($data)
-	    	@if(array_key_exists('relation', $attributes))
-			    @if(array_key_exists('modify', $attributes))
-
-			        <?php $relationshipData = call_user_func_array($attributes['modify'], [
-			            $data->getRelationshipObject($attributes['relation']),
-			            $data
-			            ]) ?>
-			    @endif
-		    @endif
-	    @endif
-
+	    @slot('help')
+	        {{ $attributes['help'] ?? '' }}
+	    @endslot
         <input
             name="{{ $attributes['id'] }}"
             type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
@@ -40,14 +21,22 @@
             />
 
 
-        <input type="hidden" id="{{ $attributes['id'] }}List" name="{{ $attributes['id'] }}" value="{{ (!empty($relationshipData)) ? $relationshipData : old($attributes['id'], $value) }}">
-    @else
+        <input type="hidden" id="{{ $attributes['id'] }}List" name="{{ $attributes['id'] }}" value="@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{ old($attributes['id'], $value) }}@endif">
+    @endinput
+@else
+	<div class="mb-2">
+	   	<input
+	        type='text'
+	        value=''
+	        class='{{ (isset($attributes["classes"])) ? $attributes["classes"] : "" }}'
+	        id='{{ $attributes["id"] }}'
+	        placeholder='{{ $attributes["placeholder"] }}'
+	        data-tagsinput
+	    	data-tagsinput-config='{{ $attributes["tagsinput-config"] }}'
+	    />
+		<input type="hidden" id="{{ $attributes['id'] }}List" name="{{ $attributes['id'] }}" value='{{ $value }}'>
+	</div>
+@endform
 
-        <div>
-            @include('vellum::cell', ['attributes' => $attributes, 'data' => $data])
-        </div>
 
-    @endform
-
-@endinput
 
