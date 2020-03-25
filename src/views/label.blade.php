@@ -1,4 +1,6 @@
-@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+@input(['id' => $attributes['id'],
+'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '',
+'attributes' => ($attributes ?? '')])
 
     @form
 
