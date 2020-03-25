@@ -39,6 +39,14 @@ class BaseField implements Field
         $this->setAttribute('element', str_replace('field', '', $element));
     }
 
+    public function inputClass($classes)
+    {
+    	/** sets classes for div container of input.blade.php * */
+    	$this->setAttribute('inputClass', $classes);
+
+    	return $this;
+    }
+
     public function dashboardContainerClass($classes)
     {
     	/**
@@ -118,6 +126,26 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function template($template)
+    {
+    	$this->setAttribute('template', $template);
+
+    	return $this;
+    }
+
+    public function yieldLabelSectionAt($section)
+    {
+    	$this->setAttribute('labelSection', $section);
+
+    	return $this;
+    }
+    public function yieldInfoTextSectionAt($section)
+    {
+    	/* sets where the info text will be yielded */
+    	$this->setAttribute('infotextSection', $section);
+
+    	return $this;
+    }
     public function container($container = [])
     {
     	/*
@@ -374,9 +402,16 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function customLabel($label)
+    {
+    	$this->setAttribute('customLabel', $label);
+
+    	return $this;
+    }
     public function customLabelClasses($classes = false)
     {
-        $this->setAttribute('label-classes', $classes);
+    	//previously label-classes
+        $this->setAttribute('customLabelClasses', $classes);
 
         return $this;
     }

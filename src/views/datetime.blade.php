@@ -1,5 +1,7 @@
 @form
-	@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+	@input(['id' => $attributes['id'],
+	'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '',
+	'attributes' => ($attributes ?? '')])
 	@slot('label')
 	    {{ $attributes['name'] }}
 	@endslot
@@ -8,12 +10,16 @@
 	    {{ $attributes['help'] ?? '' }}
 	@endslot
 
-	@slot('customLabel')
-        {{ $attributes['label-classes'] ?? '' }}
+	@slot('customLabelClasses')
+        {{ $attributes['customLabelClasses'] ?? '' }}
     @endslot
 
     @slot('labelClasses')
         {{ $attributes['labelClasses'] ?? '' }}
+    @endslot
+
+    @slot('yieldAt')
+    	{{ $attributes['yieldAt'] ?? '' }}
     @endslot
 
 	<div class="input-group date input-group-sm" time-picker-{{ $attributes['id'] }}>

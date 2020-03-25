@@ -1,5 +1,7 @@
 
-@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+@input(['id' => $attributes['id'],
+'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '',
+'attributes' => ($attributes ?? '')])
     @slot('label')
         {{ $attributes['name'] }}
     @endslot
@@ -20,8 +22,8 @@
         {{ isset($attributes['required']) ? true : '' }}
     @endslot
 
-    @slot('customLabel')
-        {{ $attributes['label-classes'] ?? '' }}
+    @slot('customLabelClasses')
+        {{ $attributes['customLabelClasses'] ?? '' }}
     @endslot
 
     @slot('uniqueMsg')

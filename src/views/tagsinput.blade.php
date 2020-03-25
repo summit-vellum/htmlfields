@@ -1,5 +1,7 @@
 @form
-	@input(['id' => $attributes['id'], 'hidden' => isset($attributes['hideOnForms']) ? 'hide' : ''])
+	@input(['id' => $attributes['id'],
+			'hidden' => isset($attributes['hideOnForms']) ? 'hide' : '',
+			'attributes' => ($attributes ?? '')])
 	    @slot('label')
 	        {{ $attributes['name'] }}
 	    @endslot

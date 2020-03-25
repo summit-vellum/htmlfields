@@ -12,8 +12,8 @@
         {{ isset($attributes['required']) ? true : '' }}
     @endslot
 
-    @slot('customLabel')
-        {{ $attributes['label-classes'] ?? '' }}
+    @slot('customLabelClasses')
+        {{ $attributes['customLabelClasses'] ?? '' }}
     @endslot
 
 

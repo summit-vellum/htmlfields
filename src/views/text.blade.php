@@ -23,11 +23,27 @@
     @endslot
 
     @slot('customLabel')
-        {{ $attributes['label-classes'] ?? '' }}
+        {{ $attributes['customLabel'] ?? '' }}
+    @endslot
+
+    @slot('customLabelClasses')
+        {{ $attributes['customLabelClasses'] ?? '' }}
     @endslot
 
     @slot('uniqueMsg')
         {{ $attributes['unique-message'] ?? '' }}
+    @endslot
+
+    @slot('uniqueMsg')
+        {{ $attributes['unique-message'] ?? '' }}
+    @endslot
+
+    @slot('yieldAt')
+    	{{ $attributes['yieldAt'] ?? '' }}
+    @endslot
+
+    @slot('labelClasses')
+        {{ $attributes['labelClasses'] ?? '' }}
     @endslot
 
     @form
