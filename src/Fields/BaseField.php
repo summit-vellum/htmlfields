@@ -59,6 +59,7 @@ class BaseField implements Field
 
     public function tinymceRows($rows)
     {
+    	/** sets number of rows in tinymce; changes height */
     	$this->setAttribute('tinymceRows', $rows);
 
     	return $this;
@@ -76,6 +77,10 @@ class BaseField implements Field
 
     public function displayDashboardNotif()
     {
+    	/**
+    	 * set to fields where you'd like to show autosave and resource lock dashboard notification
+    	 * e.g You are currently editing this post
+    	 */
     	$this->setAttribute('displayDashboardNotif', true);
 
         return $this;
@@ -83,6 +88,10 @@ class BaseField implements Field
 
     public function setJs($jrArray =[])
     {
+    	/**
+    	 * renders js per html field
+    	 * can be validation or set of functions
+    	 */
     	$this->setAttribute('js', $jrArray);
 
     	return $this;
@@ -104,6 +113,9 @@ class BaseField implements Field
 
     public function classes($classes)
     {
+    	/**
+    	 * sets classes to an html field declared under {Module}Resource.php
+    	 */
     	$this->setAttribute('classes', $classes);
 
     	return $this;
@@ -111,6 +123,10 @@ class BaseField implements Field
 
     public function setStaticValue($value)
     {
+    	/**
+    	 * use this when you want to declare a static value in an html field.
+    	 * currenlty used in label.blade.php
+    	 */
     	$this->setAttribute('staticValue', $value);
 
     	return $this;
@@ -119,7 +135,8 @@ class BaseField implements Field
     public function setLabelElement($element)
     {
     	/**
-    	 * $element = label, h2 so on
+    	 * $element = label, h2 so on.
+    	 * currenlty used in label.blade.php
     	 */
     	$this->setAttribute('labelElement', $element);
 
@@ -128,6 +145,14 @@ class BaseField implements Field
 
     public function template($template)
     {
+    	/**
+    	 * sets html template for your fields.
+    	 * templates are saved under /templates folder
+    	 * must use yieldAt(), yieldLabelSectionAt(), or yieldInfoTextSectionAt() attribute
+    	 * in your field to be pulled in the template
+    	 *
+    	 * check Post/views/templates/form.blade.php for reference
+    	 */
     	$this->setAttribute('template', $template);
 
     	return $this;
@@ -135,13 +160,15 @@ class BaseField implements Field
 
     public function yieldLabelSectionAt($section)
     {
+    	/* Yields input.blade.php's label to a desired page location */
+
     	$this->setAttribute('labelSection', $section);
 
     	return $this;
     }
     public function yieldInfoTextSectionAt($section)
     {
-    	/* sets where the info text will be yielded */
+    	/* Yields input.blade.php's info text to a desired page location */
     	$this->setAttribute('infotextSection', $section);
 
     	return $this;
@@ -162,7 +189,7 @@ class BaseField implements Field
 
     public function yieldAt($yieldName)
     {
-    	/* Yields html field to desired page location */
+    	/* Yields html field to a desired page location */
     	$this->setAttribute('yieldAt', $yieldName);
 
     	return $this;
@@ -233,6 +260,10 @@ class BaseField implements Field
 
     public function dateConfig($config)
     {
+    	/**
+    	 * Data config for datatime.blade.php
+    	 * e.g ->dateConfig(['single' => true, 'dateFormat' => 'ddd, MMM DD, YYYY, hh:mm A'])
+    	 */
     	$this->setAttribute('data-config', json_encode($config));
 
     	return $this;
@@ -271,6 +302,9 @@ class BaseField implements Field
 
     public function labelClasses($classes)
     {
+    	/**
+    	 * sets class to input.blade.php's label
+    	 */
     	$this->setAttribute('labelClasses', $classes);
 
         return $this;
@@ -404,12 +438,18 @@ class BaseField implements Field
 
     public function customLabel($label)
     {
+    	/**
+    	 * custom label used in input.blade.php
+    	 */
     	$this->setAttribute('customLabel', $label);
 
     	return $this;
     }
     public function customLabelClasses($classes = false)
     {
+    	/**
+    	 * sets custom label's class in input.blade.php
+    	 */
     	//previously label-classes
         $this->setAttribute('customLabelClasses', $classes);
 
