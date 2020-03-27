@@ -43,7 +43,7 @@
 	@endinput
 @else
 
-	<div class='input-group date input-group-sm mb-2' time-picker>
+	<div class='input-group date input-group-sm mb-2' time-picker-{{ $attributes['id'] }}>
 		<input
 			name='{{ $attributes["id"] }}'
 			type=''

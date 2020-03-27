@@ -111,6 +111,13 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function anArrayField($boolean = true)
+    {
+    	$this->setAttribute('anArrayField', $boolean);
+
+    	return $this;
+    }
+
     public function classes($classes)
     {
     	/**

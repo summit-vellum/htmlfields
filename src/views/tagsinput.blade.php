@@ -9,8 +9,11 @@
 	    @slot('help')
 	        {{ $attributes['help'] ?? '' }}
 	    @endslot
+
+	    @slot('labelClasses')
+	        {{ $attributes['labelClasses'] ?? '' }}
+	    @endslot
         <input
-            name="{{ $attributes['id'] }}"
             type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
             value="{{ old($attributes['id'], $value) }}"
             class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
@@ -23,10 +26,10 @@
             />
 
 
-        <input type="hidden" id="{{ $attributes['id'] }}List" name="{{ $attributes['id'] }}" value="@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{ old($attributes['id'], $value) }}@endif">
+        <input type="hidden" id="{{ $attributes['id'] }}List" name="{{ $attributes['id'] }}{{ isset($attributes['anArrayField']) ? '[]' : ''}}" value="@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{ old($attributes['id'], $value) }}@endif">
     @endinput
 @else
-	<div class="mb-2">
+	<div class="mb-2 {{ $containerClass ?? ''}}">
 	   	<input
 	        type='text'
 	        value=''

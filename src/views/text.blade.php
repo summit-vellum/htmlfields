@@ -49,7 +49,7 @@
     @form
 
         <input
-            name="{{ $attributes['id'] }}"
+            name="{{ $attributes['id'] }}{{ isset($attributes['anArrayField']) ? '[]' : ''}}"
             type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
             value="@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{old($attributes['id'], $value)}}@endif"
             class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
