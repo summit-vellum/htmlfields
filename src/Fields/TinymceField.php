@@ -10,14 +10,14 @@ class TinymceField extends BaseField implements Asset
     public function getStyle()
     {
         return   [
-            // 
+            //
         ];
     }
 
     public function getScript()
     {
         return   [
-            // 
+           'vendor/html/js/tinymce/tinymce.min.js'
         ];
     }
 }

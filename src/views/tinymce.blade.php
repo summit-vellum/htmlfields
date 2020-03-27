@@ -37,7 +37,6 @@
 
 @form
     @push('scripts')
-        <script src="{{ url('vendor/tinymce/tinymce.min.js') }}"></script>
         <script>
             @stack('shortcode_scripts')
         </script>
