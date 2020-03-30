@@ -13,6 +13,11 @@
 	    @slot('labelClasses')
 	        {{ $attributes['labelClasses'] ?? '' }}
 	    @endslot
+
+	    @slot('required')
+	        {{ isset($attributes['required']) ? true : '' }}
+	    @endslot
+
         <input
             type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
             value="{{ old($attributes['id'], $value) }}"
@@ -22,7 +27,7 @@
             placeholder="{{ isset($attributes['placeholder']) ? $attributes['placeholder'] : '' }}"
             @if(isset($attributes['tagsinput'])) {{ $attributes['tagsinput'] }} @endif
             @if(isset($attributes['tagsinput-config'])) data-tagsinput-config="{{ $attributes['tagsinput-config'] }}" @endif
-            @if(isset($attributes['required']) && $attributes['required'] === 1) {{ 'required' }} @endif
+            @if(isset($attributes['required'])) {{ 'required' }} @endif
             />
 
 
