@@ -8,6 +8,9 @@
         {{ $attributes['help'] ?? '' }}
     @endslot
 
+    @slot('labelClasses')
+        {{ $attributes['labelClasses'] ?? '' }}
+    @endslot
 
     @form
 

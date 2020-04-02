@@ -18,6 +18,10 @@
         {{ $attributes['customLabelClasses'] ?? '' }}
     @endslot
 
+    @slot('labelClasses')
+        {{ $attributes['labelClasses'] ?? '' }}
+    @endslot
+
     @form
 
       <select

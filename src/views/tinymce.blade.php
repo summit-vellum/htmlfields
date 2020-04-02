@@ -13,14 +13,19 @@
         {{ $attributes['help'] ?? '' }}
     @endslot
 
+    @slot('labelClasses')
+        {{ $attributes['labelClasses'] ?? '' }}
+    @endslot
+
     @form
 
     	<textarea
     	rows="{{ isset($attributes['tinymceRows']) ? $attributes['tinymceRows'] : '' }}"
-        name="{{ $attributes['id'] }}"
+        name="{{ $attributes['id'] }}{{ isset($attributes['anArrayField']) ? '[]' : ''}}"
         class="form-control"
         id="{{ $attributes['id'] }}"
         @isset($attributes['required']) {{ 'required' }} @endisset
+        {!! $attributes['dataAttributes'] ?? '' !!}
         />{!! old($attributes['id'], $value) !!}</textarea>
 
     @else
@@ -41,8 +46,11 @@
             @stack('shortcode_scripts')
         </script>
         <script>
+        	var tools = 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | customBullist customNumlist | link code | shortcodes | fullscreen';
+
         	$(document).ready(function(){
-        		tinymce.init({
+
+        		var settings = {
 	                selector:'#{{ $attributes['id'] }}',
 	                // height: 500,
 	                width: '100%',
@@ -52,12 +60,31 @@
 	                    'searchreplace visualblocks code fullscreen',
 	                    'insertdatetime media table paste code help wordcount'
 	                ],
-	                toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help | shortcodes | code' ,
 	                content_css: [
 	                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
 	                    '//www.tiny.cloud/css/codepen.min.css'
 	                ],
 	                setup: function(editor) {
+
+	                	@if(isset($attributes['tinyMceAttr']) && isset($attributes['tinyMceAttr']['charCount']))
+		                	editor.on('keyup', function (e) {
+		                		updateCharCounter(this, getContentLength(tinymce));
+				            });
+				        @endif
+
+				        @if(isset($attributes['tinyMceAttr']) && isset($attributes['tinyMceAttr']['maxChars']))
+				        	var allowedKeys = [8, 37, 38, 39, 40, 46]; // backspace, delete and cursor keys
+				            editor.on('keydown', function (e) {
+				                if (allowedKeys.indexOf(e.keyCode) != -1) return true;
+				                if (getContentLength(tinymce) + 1 > this.settings.max_chars) {
+				                    e.preventDefault();
+				                    e.stopPropagation();
+				                    return false;
+				                }
+				                return true;
+				            });
+				        @endif
+
 
 	                    @if(!empty($shortcodes))
 
@@ -91,7 +118,50 @@
 
 	                    @endif
 	                }
-	            });
+	            };
+
+	            @if(isset($attributes['tinyMceAttr']) && isset($attributes['tinyMceAttr']['tools']))
+	            	var customTools = '{{ $attributes['tinyMceAttr']['tools'] }}';
+		            $.extend(settings, {
+		            	toolbar: customTools
+		            });
+		        @else
+		        	$.extend(settings, {
+		            	toolbar: tools
+		            });
+	            @endif
+
+	            @if(isset($attributes['tinyMceAttr']) && isset($attributes['tinyMceAttr']['hideStatusBar']))
+	            	$.extend(settings, {
+	            		statusbar: false
+	            	});
+	            @endif
+
+	            @if(isset($attributes['tinyMceAttr']) && isset($attributes['tinyMceAttr']['charCount']) && isset($attributes['tinyMceAttr']['maxChars']))
+	            	$.extend(settings, {
+	            		max_chars: '{{ $attributes['tinyMceAttr']['maxChars'] }}',
+	            		init_instance_callback: function () {
+	            			// initializes counter div with max char count
+				            $('#' + this.id).siblings('.tox-tinymce')
+				            				.find('.tox-editor-container')
+				            				.append($('<div class="char_count" style="text-align:right;color:#999;padding:4px;"></div>'));
+				            updateCharCounter(this, getContentLength(tinymce));
+				        },
+				        paste_preprocess: function (plugin, args) {
+				            var activeEditor = tinymce.get(tinymce.activeEditor.id);
+				            var len = activeEditor.contentDocument.body.innerText.length;
+				            var text = $(args.content).text();
+				            if (len + text.length > activeEditor.settings.max_chars) {
+				                alert('Pasting this exceeds the maximum allowed number of ' + activeEditor.settings.max_chars + ' characters.');
+				                args.content = '';
+				            } else {
+				                updateCharCounter(activeEditor, len + text.length);
+				            }
+				        }
+	            	});
+	            @endif
+
+        		tinymce.init(settings);
         	});
         </script>
     @endpush

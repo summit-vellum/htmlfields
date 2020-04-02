@@ -57,6 +57,13 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function tinyMceAttributes($attr = [])
+    {
+    	$this->setAttribute('tinyMceAttr', $attr);
+
+    	return $this;
+    }
+
     public function tinymceRows($rows)
     {
     	/** sets number of rows in tinymce; changes height */
@@ -86,13 +93,30 @@ class BaseField implements Field
         return $this;
     }
 
-    public function setJs($jrArray =[])
+    public function setDataAttributes($data = [])
+    {
+    	$this->setAttribute('dataAttributes', arrayToHtmlAttributes($data));
+
+    	return $this;
+    }
+
+    public function setStyle($cssArray =[])
+    {
+    	/**
+    	 * renders css per html field
+    	 */
+    	$this->setAttribute('css', $cssArray);
+
+    	return $this;
+    }
+
+    public function setJs($jsArray =[])
     {
     	/**
     	 * renders js per html field
     	 * can be validation or set of functions
     	 */
-    	$this->setAttribute('js', $jrArray);
+    	$this->setAttribute('js', $jsArray);
 
     	return $this;
     }
@@ -509,10 +533,11 @@ class BaseField implements Field
         $property = $this->getAttribute('id');
 
         $js = ($this->getAttribute('js'))?:[];
+        $css = ($this->getAttribute('css'))?:[];
 
         foreach ($this->getAttributes() as $key => $value) {
             if($attr = $this->getAttribute($key) !== null) {
-                $attributes['assets']['style'][$property] = $this->getStyle();
+                $attributes['assets']['style'][$property] = array_merge($this->getStyle(), $css);
                 $attributes['assets']['script'][$property] = array_merge($this->getScript(), $js);
                 $attributes['collections'][$property][$key] = $value;
 

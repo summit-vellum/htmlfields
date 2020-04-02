@@ -30,11 +30,14 @@
         {{ $attributes['unique-message'] ?? '' }}
     @endslot
 
+    @slot('labelClasses')
+        {{ $attributes['labelClasses'] ?? '' }}
+    @endslot
 
     @form
 
         <textarea
-            name="{{  $attributes['id'] }}"
+            name="{{  $attributes['id'] }}{{ isset($attributes['anArrayField']) ? '[]' : ''}}"
             class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
             id="{{  $attributes['id'] }}"
             min-count="{{ isset($attributes['min-count']) ? $attributes['min-count'] : '' }}"

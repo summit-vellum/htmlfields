@@ -15,6 +15,10 @@
         {{ $attributes['customLabelClasses'] ?? '' }}
     @endslot
 
+    @slot('labelClasses')
+        {{ $attributes['labelClasses'] ?? '' }}
+    @endslot
+
     <select
         name="{{ $name }}"
         class="custom-select"

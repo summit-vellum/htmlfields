@@ -16,5 +16,6 @@ return [
         'Quill\Html\Fields\TagsinputField',
         'Quill\Html\Fields\LabelField',
         'Quill\Html\Fields\ToggleField',
+        'Quill\Html\Fields\ButtonField',
     ]
 ];
