@@ -453,9 +453,16 @@ class BaseField implements Field
         return $this;
     }
 
-    public function uniqueChecker($text = false)
+    public function uniqueChecker($text = [])
     {
-        $this->setAttribute('unique-message', $text);
+    	/**
+    	 * Sample usage
+    	 *  [
+            	'unique' => 'Nice! You have a unique title!',
+            	'hasDuplicate' => 'Sorry, That title is already taken. Please provide another one.'
+            ]
+    	 */
+        $this->setAttribute('unique-message', json_encode($text));
 
         return $this;
     }
