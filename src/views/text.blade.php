@@ -50,7 +50,7 @@
 
         <input
             name="{{ $attributes['id'] }}{{ isset($attributes['anArrayField']) ? '[]' : ''}}"
-            type="{{ isset($attributes['hideOnForms']) ? 'hidden' : 'text' }}"
+            type="{{ isset($attributes['hideOnForms']) ? 'hidden' : (isset($attributes['inputType']) ? $attributes['inputType'] : 'text') }}"
             value="@if($data)@include('vellum::cell', ['attributes' => $attributes, 'data' => $data])@else{{old($attributes['id'], $value)}}@endif"
             class="{{ (isset($attributes['classes'])) ? $attributes['classes'] : '' }}"
             id="{{ $attributes['id'] }}"
@@ -61,7 +61,7 @@
             {{ isset($attributes['unique-message']) ? 'unique-message='.$attributes['unique-message'] : '' }}
             {{ isset($attributes['autoslug-src']) ? 'autoslug='.$attributes['autoslug-src'] : '' }}
             autocomplete="off"
-
+            {{ isset($attributes['disabled']) ? 'disabled' : '' }}
             @foreach(config('form.attributes') as $attr)
                 {{ isset($attributes[$attr]) ? $attr : '' }}
             @endforeach

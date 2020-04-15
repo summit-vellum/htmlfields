@@ -72,6 +72,20 @@ class BaseField implements Field
     	return $this;
     }
 
+    public function setInputType($type)
+    {
+    	$this->setAttribute('inputType', $type);
+
+    	return $this;
+    }
+
+    public function disabled()
+    {
+    	$this->setAttribute('disabled', true);
+
+    	return $this;
+    }
+
     public function displayAsEdit()
     {
     	/**
