@@ -445,6 +445,13 @@ class BaseField implements Field
         return $this;
     }
 
+    public function slugId($id)
+    {
+        $this->setAttribute('slugId', $id);
+
+        return $this;
+    }
+
     public function autoSlug()
     {
         $this->setAttribute('autoslug-src', $this->attributes['id']);

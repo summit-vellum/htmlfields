@@ -46,7 +46,7 @@
             unique-message="{{ isset($attributes['unique-message']) ? $attributes['unique-message'] : '' }}"
             {{ isset($attributes['autoslug-src']) ? 'autoslug='.$attributes['autoslug-src'] : '' }}
             {{ isset($attributes['autoslug']) ? 'autoslug-' . $attributes['autoslug'] . '=' . $attributes['autoslug-once'] : '' }}
-
+            {{ isset($attributes['slugId']) ? 'slugId='.$attributes['slugId'] : '' }}
             @foreach(config('form.attributes') as $attr)
                 {{ isset($attributes[$attr]) ? $attr : '' }}
             @endforeach
