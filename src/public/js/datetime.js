@@ -22,7 +22,7 @@ $(document).ready(function(){
 	});
 
 	// prevent popup from closing when user clicks apply on date picker
-	$(document).on('click', '.datepicker-container, .daterangepicker, .next.available, .preve.available',
+	$(document).on('click', '.datepicker-container, .daterangepicker, .next.available, .prev.available',
 		function(event){
 			event.stopPropagation();
 		}
