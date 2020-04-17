@@ -49,6 +49,12 @@ var loadDatePicker = function(attr) {
         }
 	};
 
+	if (typeof attr.minDate !== 'undefined' && attr.minDate != '') {
+        $.extend(settings, {
+            minDate:attr.minDate
+        });
+    }
+
 	if (typeof attr.endDate !== 'undefined' && attr.endDate != '') {
         $.extend(settings, {
             endDate:attr.endDate
