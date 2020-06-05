@@ -46,7 +46,7 @@
             @stack('shortcode_scripts')
         </script>
         <script>
-        	var tools = 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | customBullist customNumlist | link code | shortcodes | fullscreen';
+        	var tools = 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | customBullist customNumlist | link imagelibrary code | shortcodes | fullscreen';
 
         	$(document).ready(function(){
 
@@ -85,6 +85,17 @@
 				            });
 				        @endif
 
+				        editor.ui.registry.addButton('imagelibrary', {
+		                    type: 'button',
+		                    icon: 'image',
+		                    tooltip: 'Image Library',
+		                    onAction : function(){
+		                    	$('#toolModal').modal('show').find('iframe').attr(
+		                    		'src',
+		                    		'{{ (Route::has("imagelibrary.feed")) ? route("imagelibrary.feed") : "" }}?target=tinymce'
+		                    	);
+		                    }
+		                });
 
 	                    @if(!empty($shortcodes))
 
